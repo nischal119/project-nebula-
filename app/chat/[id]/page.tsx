@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, use } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -16,19 +15,15 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { companions } from "@/lib/data";
+import { useRouter } from "next/navigation";
 
-export default function ChatPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = use(params);
+export default function ChatPage({ params }: { params: { id: string } }) {
   const [companion, setCompanion] = useState<any>(null);
   const [messages, setMessages] = useState([
     {
       role: "assistant",
       content:
-        "When Jamie walked in I knew she was mad about the locks being changed...",
+        'When Jamie walked in I knew she was mad about the locks being changed. "Look who it is the girl who thinks she keep staying here without paying me. It\'s been three months Jamie I can\'t let you go another dodging rent." I said with a stern tone. "I know but my car broke down again and it\'s gonna take a lot to fix it." she says with big pleading eyes. Her car was a real piece of shit, but her online shopping was the real reason for culprit here.',
     },
   ]);
   const [inputMessage, setInputMessage] = useState("");
@@ -36,9 +31,9 @@ export default function ChatPage({
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const found = companions.find((c) => c.id.toString() === id);
+    const found = companions.find((c) => c.id.toString() === params.id);
     if (found) setCompanion(found);
-  }, [id]);
+  }, [params.id]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -48,19 +43,29 @@ export default function ChatPage({
 
   const handleSendMessage = () => {
     if (inputMessage.trim() === "") return;
-    const newMessage = { role: "user", content: inputMessage };
+
+    const newMessage = {
+      role: "user",
+      content: inputMessage,
+    };
+
     setMessages([...messages, newMessage]);
     setInputMessage("");
+
+    // Simulate AI response (replace with actual AI integration later)
     setTimeout(() => {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { role: "assistant", content: "This is a simulated AI response." },
-      ]);
+      const aiResponse = {
+        role: "assistant",
+        content:
+          "This is a simulated AI response. Integrate with an actual AI model for real conversations.",
+      };
+      setMessages((prevMessages) => [...prevMessages, aiResponse]);
     }, 1000);
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-5rem)]">
+    <div className="flex flex-col h-[calc(100vh-4rem)]">
+      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -93,14 +98,14 @@ export default function ChatPage({
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-gray-400 hover:text-white"
+                className="text-gray-400 hover:text-white hidden sm:flex"
               >
                 <Phone className="w-5 h-5" />
               </Button>
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-gray-400 hover:text-white"
+                className="text-gray-400 hover:text-white hidden sm:flex"
               >
                 <Video className="w-5 h-5" />
               </Button>
@@ -116,6 +121,7 @@ export default function ChatPage({
         </div>
       </motion.div>
 
+      {/* Chat Area */}
       <div className="flex-1 overflow-auto p-4">
         <div className="container max-w-4xl mx-auto space-y-6">
           {messages.map((message, index) => (
@@ -161,6 +167,7 @@ export default function ChatPage({
         </div>
       </div>
 
+      {/* Input Area */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -171,14 +178,14 @@ export default function ChatPage({
             <Button
               variant="ghost"
               size="icon"
-              className="text-gray-400 hover:text-white"
+              className="text-gray-400 hover:text-white hidden sm:flex"
             >
               <Image className="w-5 h-5" />
             </Button>
             <Button
               variant="ghost"
               size="icon"
-              className="text-gray-400 hover:text-white"
+              className="text-gray-400 hover:text-white hidden sm:flex"
             >
               <Paperclip className="w-5 h-5" />
             </Button>
@@ -196,7 +203,7 @@ export default function ChatPage({
             <Button
               variant="ghost"
               size="icon"
-              className="text-gray-400 hover:text-white"
+              className="text-gray-400 hover:text-white hidden sm:flex"
             >
               <Smile className="w-5 h-5" />
             </Button>
