@@ -76,11 +76,6 @@ export function Sidebar() {
         <div className="p-4 border-b border-white/10">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 flex-shrink-0" />
-            {isSidebarOpen && (
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                CompanionAI
-              </span>
-            )}
           </div>
 
           {isSidebarOpen && (

@@ -44,16 +44,16 @@ export function Header() {
   return (
     <div
       className={cn(
-        "sticky top-0 z-50 transition-all duration-200 w-full",
+        "sticky top-0 z-50 transition-all duration-200 w-full ",
         isScrolled
           ? "bg-[#1A1B1E]/95 backdrop-blur-md border-b border-white/10"
           : "bg-transparent"
       )}
     >
       {/* Top Bar */}
-      <div className="flex items-center h-16 px-4">
+      <div className="flex items-center justify-evenly h-16 px-4">
         {/* Left Section */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center  gap-4">
           <Button
             variant="ghost"
             size="icon"
@@ -62,10 +62,13 @@ export function Header() {
           >
             <Menu className="w-5 h-5" />
           </Button>
+          <span className="text-lg font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            CompanionAI
+          </span>
         </div>
 
         {/* Center Section - Search (Desktop Only) */}
-        <div className="hidden md:flex flex-1 max-w-xl mx-auto px-4">
+        <div className="hidden md:flex flex-1 max-w-xl  px-4">
           <div className="relative w-full">
             <Input
               placeholder="Search companions..."
@@ -76,7 +79,7 @@ export function Header() {
         </div>
 
         {/* Right Section */}
-        <div className="flex items-center gap-2 ml-auto">
+        <div className="flex items-center gap-2 ">
           {/* NSFW Toggle - Always visible but compact on mobile */}
           <div className="flex items-center gap-2 px-2 py-1.5 bg-white/5 rounded-full border border-white/10">
             <span className="text-xs font-medium">NSFW</span>
@@ -112,7 +115,7 @@ export function Header() {
                 transition={{ delay: index * 0.05 }}
                 onClick={() => setActiveCategory(category)}
                 className={cn(
-                  "px-4 py-2 rounded-full text-sm transition-all duration-200 whitespace-nowrap",
+                  " py-2 rounded-full text-sm transition-all duration-200 whitespace-nowrap p-2",
                   activeCategory === category
                     ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white"
                     : "bg-white/5 text-gray-400 hover:bg-gradient-to-r hover:from-purple-600/20 hover:to-pink-600/20 hover:text-white"
