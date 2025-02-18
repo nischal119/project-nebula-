@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
-import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const pricingTiers = [
   {
@@ -17,7 +17,11 @@ const pricingTiers = [
     name: "Premium",
     price: "$29",
     period: "/month",
-    features: ["All basic features", "Unlimited AI personalities", "Voice messages"],
+    features: [
+      "All basic features",
+      "Unlimited AI personalities",
+      "Voice messages",
+    ],
     buttonText: "Choose Premium",
     buttonVariant: "premium" as const,
     popular: true,
@@ -26,11 +30,15 @@ const pricingTiers = [
     name: "VIP",
     price: "$99",
     period: "/month",
-    features: ["All premium features", "Custom AI personality creation", "Priority support"],
+    features: [
+      "All premium features",
+      "Custom AI personality creation",
+      "Priority support",
+    ],
     buttonText: "Choose VIP",
     buttonVariant: "default" as const,
   },
-]
+];
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -50,13 +58,15 @@ const cardVariants = {
       ease: "easeInOut",
     },
   },
-}
+};
 
 export function Pricing() {
   return (
     <section className="py-20">
       <div className="container">
-        <h2 className="text-3xl font-bold text-center mb-12">Choose Your Plan</h2>
+        <h2 className="text-3xl font-bold text-center mb-12">
+          Choose Your Plan
+        </h2>
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {pricingTiers.map((tier, i) => (
             <motion.div
@@ -94,7 +104,7 @@ export function Pricing() {
                   "w-full",
                   tier.buttonVariant === "premium"
                     ? "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-                    : "bg-purple-600 hover:bg-purple-700",
+                    : "bg-purple-600 hover:bg-purple-700"
                 )}
               >
                 {tier.buttonText}
@@ -104,6 +114,5 @@ export function Pricing() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

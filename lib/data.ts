@@ -10,7 +10,7 @@ export const companions = [
     views: "153.4K",
     likes: "9.8K",
     messages: "105",
-    tags: ["Scenario", "Submissive", "NSFW", "Erotic Roleplay"],
+    tags: ["Sexy Female", "Submissive", "Flirty", "Scenarios"],
     creator: "Chickenman3108",
     createdAt: "Sep 15, 2024",
     updatedAt: "4 months ago",
@@ -18,18 +18,18 @@ export const companions = [
   {
     id: 2,
     name: "Luna",
-    description: "Your personal AI companion who's always eager to chat and share moments with you.",
+    description:
+      "Your personal AI companion who's always eager to chat and share moments with you.",
     image:
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-16%20at%208.36.23%E2%80%AFPM-8mcsZgV40Qu4MUoN8XzAUU15pw7svw.png",
     rating: "SFW",
     views: "12.3K",
     likes: "5.2K",
     messages: "89",
-    tags: ["Friendly", "Caring", "Intellectual"],
+    tags: ["👧 Female", "Sweet", "Professional", "Friendly"],
     creator: "AICompanions",
     createdAt: "Jan 1, 2024",
     updatedAt: "2 weeks ago",
   },
-  // ... (other companions)
-]
-
+  // Add more companions with relevant tags for filtering
+];

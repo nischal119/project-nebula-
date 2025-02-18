@@ -1,4 +1,4 @@
-import { Star } from "lucide-react"
+import { Star } from "lucide-react";
 
 export function Testimonial() {
   return (
@@ -12,16 +12,19 @@ export function Testimonial() {
               {Array(5)
                 .fill(null)
                 .map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-yellow-400 stroke-none" />
+                  <Star
+                    key={i}
+                    className="w-4 h-4 fill-yellow-400 stroke-none"
+                  />
                 ))}
             </div>
           </div>
         </div>
         <p className="text-purple-200">
-          "The most engaging AI companion I've ever experienced. The conversations feel so natural and intimate."
+          "The most engaging AI companion I've ever experienced. The
+          conversations feel so natural and intimate."
         </p>
       </div>
     </section>
-  )
+  );
 }
-

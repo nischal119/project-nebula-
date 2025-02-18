@@ -1,16 +1,16 @@
-import { create } from "zustand"
+import { create } from "zustand";
 
 interface AppState {
-  isNSFW: boolean
-  toggleNSFW: () => void
-  isSidebarOpen: boolean
-  toggleSidebar: () => void
+  isNSFW: boolean;
+  toggleNSFW: () => void;
+  isSidebarOpen: boolean;
+  toggleSidebar: () => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
   isNSFW: false,
   toggleNSFW: () => set((state) => ({ isNSFW: !state.isNSFW })),
   isSidebarOpen: false,
-  toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
-}))
-
+  toggleSidebar: () =>
+    set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
+}));

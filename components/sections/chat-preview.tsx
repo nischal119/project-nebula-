@@ -8,10 +8,11 @@ export function ChatPreview() {
           </p>
         </div>
         <div className="flex justify-end">
-          <p className="bg-pink-600/30 p-3 rounded-lg inline-block">I can't stop thinking about you either...</p>
+          <p className="bg-pink-600/30 p-3 rounded-lg inline-block">
+            I can't stop thinking about you either...
+          </p>
         </div>
       </div>
     </section>
-  )
+  );
 }
-

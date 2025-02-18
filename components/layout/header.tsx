@@ -4,10 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useAppStore } from "@/lib/store";
-import { Search, Plus, Bell, Globe, ChevronDown } from "lucide-react";
+import { Search, Plus, Bell, Globe, ChevronDown, Menu } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { ProfileDropdown } from "@/components/layout/profile-dropdown";
+import { motion } from "framer-motion";
 
 const categories = [
   "Sexy Female",
@@ -24,10 +26,9 @@ const categories = [
 
 export function Header() {
   const [activeCategory, setActiveCategory] = useState("Sexy Female");
-  const { isNSFW, toggleNSFW } = useAppStore();
+  const { isNSFW, toggleNSFW, toggleSidebar, isSidebarOpen } = useAppStore();
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-  const { isSidebarOpen, toggleSidebar } = useAppStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,79 +44,82 @@ export function Header() {
   return (
     <div
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-colors duration-200",
+        "sticky top-0 z-50 transition-all duration-200 w-full",
         isScrolled
-          ? " backdrop-blur-md border-b border-white/10"
+          ? "bg-[#1A1B1E]/95 backdrop-blur-md border-b border-white/10"
           : "bg-transparent"
       )}
     >
       {/* Top Bar */}
-      <div className="p-3 flex items-center gap-4">
-        <div className="flex items-center gap-4 mr-4">
-          {isSidebarOpen && (
-            <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              CompanionAI
-            </span>
-          )}
+      <div className="flex items-center h-16 px-4">
+        {/* Left Section */}
+        <div className="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={toggleSidebar}
+          >
+            <Menu className="w-5 h-5" />
+          </Button>
         </div>
 
-        <div className="flex-1 max-w-2xl">
-          <div className="relative">
+        {/* Center Section - Search (Desktop Only) */}
+        <div className="hidden md:flex flex-1 max-w-xl mx-auto px-4">
+          <div className="relative w-full">
             <Input
-              placeholder="Click to open Search..."
-              className="bg-[#27282B] border-0 pl-10"
+              placeholder="Search companions..."
+              className="w-full bg-white/5 border-white/10 pl-10 focus:border-purple-500 transition-colors"
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <Button variant="ghost" size="sm" className="gap-2">
-            <Plus className="w-4 h-4" />
-            Create
-            <ChevronDown className="w-4 h-4" />
-          </Button>
-
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-[#27282B] rounded-full">
-            <span className="text-sm">NSFW</span>
+        {/* Right Section */}
+        <div className="flex items-center gap-2 ml-auto">
+          {/* NSFW Toggle - Always visible but compact on mobile */}
+          <div className="flex items-center gap-2 px-2 py-1.5 bg-white/5 rounded-full border border-white/10">
+            <span className="text-xs font-medium">NSFW</span>
             <Switch
               checked={isNSFW}
               onCheckedChange={toggleNSFW}
-              className="data-[state=checked]:bg-purple-600"
+              className="scale-75 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-purple-600 data-[state=checked]:to-pink-600"
             />
           </div>
 
-          <Button variant="ghost" size="icon">
-            <Globe className="w-4 h-4" />
-          </Button>
-
-          <Button variant="ghost" size="icon">
+          {/* Always Visible Buttons */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="hover:bg-gradient-to-r hover:from-purple-600/20 hover:to-pink-600/20"
+          >
             <Bell className="w-4 h-4" />
           </Button>
 
-          <div className="h-8 w-8 rounded-full bg-purple-600 flex items-center justify-center">
-            SL
-          </div>
+          <ProfileDropdown />
         </div>
       </div>
 
-      {/* Categories */}
-      {isMainPage && (
-        <div className="overflow-x-auto no-scrollbar">
-          <div className="flex gap-2 p-2 min-w-max">
-            {categories.map((category) => (
-              <button
+      {/* Categories - Hidden when sidebar is open on mobile */}
+      {isMainPage && !isSidebarOpen && (
+        <div className="overflow-x-auto no-scrollbar border-t border-white/5">
+          <div className="flex gap-2 p-2 px-4 min-w-max">
+            {categories.map((category, index) => (
+              <motion.button
                 key={category}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
                 onClick={() => setActiveCategory(category)}
                 className={cn(
-                  "px-4 py-1.5 rounded-full text-sm transition-colors",
+                  "px-4 py-2 rounded-full text-sm transition-all duration-200 whitespace-nowrap",
                   activeCategory === category
-                    ? "bg-purple-600 text-white"
-                    : "bg-[#27282B] text-gray-400 hover:bg-gray-700 hover:text-white"
+                    ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+                    : "bg-white/5 text-gray-400 hover:bg-gradient-to-r hover:from-purple-600/20 hover:to-pink-600/20 hover:text-white"
                 )}
               >
                 {category}
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
