@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    font-size: 16px;
+    touch-action: manipulation;
+  }
+
+  body {
+    @apply antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -12,3 +24,7 @@
   }
 }
 
+/* Prevent text size adjustment on orientation change */
+html {
+  -webkit-text-size-adjust: 100%;
+}

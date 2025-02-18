@@ -1,29 +1,29 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Heart, Share2, Flag, Eye, Star, ArrowLeft } from "lucide-react"
-import { motion } from "framer-motion"
-import Link from "next/link"
-import { companions } from "@/lib/data"
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Heart, Share2, Flag, Eye, Star, ArrowLeft } from "lucide-react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { companions } from "@/lib/data";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function CompanionPage({ params }: { params: { id: string } }) {
-  const [companion, setCompanion] = useState<any>(null)
-  const router = useRouter()
+  const [companion, setCompanion] = useState<any>(null);
+  const router = useRouter();
 
   useEffect(() => {
-    const found = companions.find((c) => c.id.toString() === params.id)
-    if (found) setCompanion(found)
-  }, [params.id])
+    const found = companions.find((c) => c.id.toString() === params.id);
+    if (found) setCompanion(found);
+  }, [params.id]);
 
-  if (!companion) return null
+  if (!companion) return null;
 
   return (
-    <div className="pb-16 pt-8">
-      <div className="max-w-6xl mx-auto px-4">
+    <div className="pb-16 pt-8 px-4 md:px-8">
+      <div className="max-w-6xl mx-auto">
         <Button variant="ghost" className="mb-6" onClick={() => router.back()}>
           <ArrowLeft className="mr-2 h-4 w-4" /> Back
         </Button>
@@ -46,9 +46,14 @@ export default function CompanionPage({ params }: { params: { id: string } }) {
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h1 className="text-3xl font-bold mb-2">{companion.name}</h1>
+                    <h1 className="text-2xl md:text-3xl font-bold mb-2">
+                      {companion.name}
+                    </h1>
                     <div className="flex items-center gap-2 text-sm">
-                      <Badge variant="secondary" className="bg-purple-600 hover:bg-purple-700">
+                      <Badge
+                        variant="secondary"
+                        className="bg-purple-600 hover:bg-purple-700"
+                      >
                         {companion.rating}
                       </Badge>
                       <span className="flex items-center gap-1 text-gray-300">
@@ -85,15 +90,21 @@ export default function CompanionPage({ params }: { params: { id: string } }) {
             >
               <div className="flex gap-8 text-center">
                 <div>
-                  <div className="text-3xl font-bold text-purple-400">{companion.views}</div>
+                  <div className="text-3xl font-bold text-purple-400">
+                    {companion.views}
+                  </div>
                   <div className="text-sm text-gray-400">Views</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-pink-400">{companion.likes}</div>
+                  <div className="text-3xl font-bold text-pink-400">
+                    {companion.likes}
+                  </div>
                   <div className="text-sm text-gray-400">Likes</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-blue-400">{companion.messages}</div>
+                  <div className="text-3xl font-bold text-blue-400">
+                    {companion.messages}
+                  </div>
                   <div className="text-sm text-gray-400">Messages</div>
                 </div>
               </div>
@@ -106,7 +117,9 @@ export default function CompanionPage({ params }: { params: { id: string } }) {
               className="p-6 rounded-xl bg-white/5 backdrop-blur"
             >
               <h3 className="text-lg font-medium mb-4">About</h3>
-              <p className="text-gray-300 leading-relaxed">{companion.description}</p>
+              <p className="text-gray-300 leading-relaxed">
+                {companion.description}
+              </p>
             </motion.div>
 
             <motion.div
@@ -119,8 +132,12 @@ export default function CompanionPage({ params }: { params: { id: string } }) {
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-purple-600" />
                 <div className="flex-1 min-w-0">
-                  <div className="text-lg font-medium truncate">@{companion.creator}</div>
-                  <div className="text-sm text-gray-400">Created {companion.createdAt}</div>
+                  <div className="text-lg font-medium truncate">
+                    @{companion.creator}
+                  </div>
+                  <div className="text-sm text-gray-400">
+                    Created {companion.createdAt}
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -134,7 +151,11 @@ export default function CompanionPage({ params }: { params: { id: string } }) {
               <h3 className="text-lg font-medium mb-4">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {companion.tags.map((tag: string) => (
-                  <Badge key={tag} variant="secondary" className="bg-white/10 text-sm">
+                  <Badge
+                    key={tag}
+                    variant="secondary"
+                    className="bg-white/10 text-sm"
+                  >
                     {tag}
                   </Badge>
                 ))}
@@ -172,10 +193,17 @@ export default function CompanionPage({ params }: { params: { id: string } }) {
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="gallery" className="mt-4">
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {[1, 2, 3, 4, 5, 6].map((item) => (
-                    <div key={item} className="aspect-square bg-white/5 rounded-lg overflow-hidden">
-                      <img src="/placeholder.svg" alt="Gallery item" className="w-full h-full object-cover" />
+                    <div
+                      key={item}
+                      className="aspect-square bg-white/5 rounded-lg overflow-hidden"
+                    >
+                      <img
+                        src="/placeholder.svg"
+                        alt="Gallery item"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                   ))}
                 </div>
@@ -188,10 +216,14 @@ export default function CompanionPage({ params }: { params: { id: string } }) {
                         <div className="w-8 h-8 rounded-full bg-purple-600" />
                         <div>
                           <div className="font-medium">User{item}</div>
-                          <div className="text-sm text-gray-400">2 hours ago</div>
+                          <div className="text-sm text-gray-400">
+                            2 hours ago
+                          </div>
                         </div>
                       </div>
-                      <p className="text-sm text-gray-300">This is a preview of a recent chat message...</p>
+                      <p className="text-sm text-gray-300">
+                        This is a preview of a recent chat message...
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -206,13 +238,17 @@ export default function CompanionPage({ params }: { params: { id: string } }) {
                           <div className="font-medium">Reviewer{item}</div>
                           <div className="flex items-center">
                             {[1, 2, 3, 4, 5].map((star) => (
-                              <Star key={star} className="w-4 h-4 fill-yellow-400 stroke-yellow-400" />
+                              <Star
+                                key={star}
+                                className="w-4 h-4 fill-yellow-400 stroke-yellow-400"
+                              />
                             ))}
                           </div>
                         </div>
                       </div>
                       <p className="text-sm text-gray-300">
-                        This companion is amazing! The conversations feel so real and engaging.
+                        This companion is amazing! The conversations feel so
+                        real and engaging.
                       </p>
                     </div>
                   ))}
@@ -223,6 +259,5 @@ export default function CompanionPage({ params }: { params: { id: string } }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
-
