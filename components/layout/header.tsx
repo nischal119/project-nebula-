@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useAppStore } from "@/lib/store";
-import { Search, Plus, Bell, Globe, ChevronDown, Menu } from "lucide-react";
+import { Search, Bell, Menu } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
